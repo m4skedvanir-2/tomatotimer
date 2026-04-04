@@ -65,7 +65,7 @@ p10er/
 |---|---|---|
 | id | SERIAL PRIMARY KEY | |
 | team_id | VARCHAR | SlackワークスペースID |
-| access_token | VARCHAR | BotトークンOAuth認証で取得 |
+| bot_token | VARCHAR | BotトークンOAuth認証で取得 |
 | created_at | TIMESTAMP | |
 
 ### timers テーブル
@@ -78,7 +78,9 @@ p10er/
 | focus_min | INTEGER | 集中時間（分） |
 | break_min | INTEGER | 休憩時間（分） |
 | started_at | TIMESTAMP | 開始時刻 |
-| status | VARCHAR | running / stopped / done |
+| status | VARCHAR | focus / break / done / stopped |
+| prev_status_text | VARCHAR | タイマー前のステータス文言（復元用） |
+| prev_status_emoji | VARCHAR | タイマー前のステータス絵文字（復元用） |
 
 ### user_settings テーブル
 | カラム | 型 | 内容 |
@@ -87,6 +89,7 @@ p10er/
 | team_id | VARCHAR | ワークスペースID |
 | user_id | VARCHAR | ユーザーID |
 | custom_status_text | VARCHAR | /pp setで設定した文言 |
+| user_token | VARCHAR | ユーザートークン（ステータス変更に使用） |
 
 ---
 
