@@ -28,6 +28,7 @@ function setupOAuthRoutes(expressApp) {
                 code: code,
                 redirect_uri: REDIRECT_URI,
             });
+            console.log('OAuth result:', JSON.stringify(result, null, 2));
             // DBにトークン保存
             await pool.query(
                 `INSERT INTO workspaces (team_id, bot_token)
@@ -35,7 +36,6 @@ function setupOAuthRoutes(expressApp) {
                  ON CONFLICT (team_id) DO UPDATE SET bot_token = $2`,
                 [result.team.id, result.bot_token]
             );
-            console.log('OAuth result:', JSON.stringify(result, null, 2));
             if (result.authed_user?.access_token) {
                 await pool.query(
                     `INSERT INTO users (team_id, user_id, user_token)
