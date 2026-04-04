@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS workspaces (
     id SERIAL PRIMARY KEY,
     team_id VARCHAR NOT NULL UNIQUE,
-    access_token VARCHAR NOT NULL,
     bot_token VARCHAR NOT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
