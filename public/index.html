@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P10ER — トマト!トマト!トマト!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── LANG SWITCH ─── -->
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('jp')">JP</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="tomato-big">🍅</div>
+    <div class="tomato-sm1">🍅</div>
+    <div class="tomato-sm2">🍅</div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"
+        data-jp="SLACK ポモドーロ タイマー"
+        data-en="SLACK POMODORO TIMER">
+        SLACK ポモドーロ タイマー
+      </div>
+      <div class="hero-title">tomat 0_0 tamot</div>
+      <div class="hero-title-sub"
+        data-jp="トマト！トマト！トマト！トマト！"
+        data-en="A butler who knows tomatoes">
+        トマト！トマト！トマト！トマト！
+      </div>
+      <p class="hero-desc"
+        data-jp="Slackに執事がやってきた。集中時間を管理し、メッセージをさばき、ステータスを変えてくれる、トマト好きな専属執事。"
+        data-en="A tomato-obsessed Slack butler. Manages your focus time, handles incoming messages, and updates your status — all with impeccable etiquette.">
+        Slackに執事がやってきた。集中時間を管理し、メッセージをさばき、ステータスを変えてくれる、トマト好きな専属執事。
+      </p>
+      <a href="https://slack.com/oauth/v2/authorize?client_id=8483005723856.10844717425602&scope=commands,chat:write,im:history,im:read,im:write,users.profile:read&user_scope="><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+      <p class="install-note" data-jp="無料・審査なし" data-en="Free. No review required.">無料・審査なし</p>
+    </div>
+  </section>
+
+  <!-- ─── FEATURE STRIP ─── -->
+  <div class="feature-strip">
+    <div class="feat-item">
+      <div class="feat-dot"></div>
+      <span data-jp="ポモドーロタイマー" data-en="Pomodoro Timer">ポモドーロタイマー</span>
+    </div>
+    <div class="feat-item">
+      <div class="feat-dot"></div>
+      <span data-jp="Slackステータス自動変更" data-en="Auto Status Update">Slackステータス自動変更</span>
+    </div>
+    <div class="feat-item">
+      <div class="feat-dot"></div>
+      <span data-jp="執事モード" data-en="Butler Mode">執事モード</span>
+    </div>
+    <div class="feat-item">
+      <div class="feat-dot"></div>
+      <span data-jp="トマト料理ランダム表示" data-en="Random Tomato Dish">トマト料理ランダム表示</span>
+    </div>
+  </div>
+
+  <!-- ─── FEATURES ─── -->
+  <section class="section">
+    <div class="section-label" data-jp="機能紹介" data-en="FEATURES">機能紹介</div>
+    <h2 class="section-title"
+      data-jp="<em>集中</em>を、もっとおいしく。"
+      data-en="Focus, with <em>tomato</em>.">
+      <em>集中</em>を、もっとおいしく。
+    </h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⏱</div>
+        <div class="feature-name" data-jp="ポモドーロタイマー" data-en="Pomodoro Timer">ポモドーロタイマー</div>
+        <p class="feature-desc"
+          data-jp="/pp ひとつで開始。総時間を5:1で自動分割し、集中→休憩を管理。"
+          data-en="Start with one command. Total time split 5:1 automatically. Focus and break, handled.">
+          /pp ひとつで開始。総時間を5:1で自動分割し、集中→休憩を管理。
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🍅</div>
+        <div class="feature-name" data-jp="ステータス自動変更" data-en="Auto Status Change">ステータス自動変更</div>
+        <p class="feature-desc"
+          data-jp="タイマー中は🍅ステータスに。終了後は自動で元に戻します。文言カスタムも可。"
+          data-en="Status becomes 🍅 during focus. Reverts after. Custom messages supported.">
+          タイマー中は🍅に。終了後は自動で元に戻します。文言カスタムも可。
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤵</div>
+        <div class="feature-name" data-jp="執事モード" data-en="Butler Mode">執事モード</div>
+        <p class="feature-desc"
+          data-jp="集中中のDMに執事が自動で丁寧に応対。あなたの邪魔を防ぎます。"
+          data-en="DMs during focus? The butler replies on your behalf, with impeccable manners.">
+          集中中のDMに執事が自動で丁寧に応対。あなたの邪魔を防ぎます。
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🍝</div>
+        <div class="feature-name" data-jp="トマト料理ランダム" data-en="Random Tomato Dish">トマト料理ランダム</div>
+        <p class="feature-desc"
+          data-jp="返信のたびにトマト料理がランダムで登場。飽きない。"
+          data-en="Each butler reply features a random tomato dish. Shakshuka or gazpacho?">
+          返信のたびにトマト料理がランダムで登場。飽きない。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── HOW TO ─── -->
+  <section class="section">
+    <div class="section-label" data-jp="使い方" data-en="HOW TO USE">使い方</div>
+    <h2 class="section-title"
+      data-jp="3ステップで<em>始まる</em>。"
+      data-en="3 steps to <em>focus</em>.">
+      3ステップで<em>始まる</em>。
+    </h2>
+    <div class="howto-steps">
+      <div class="howto-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title" data-jp="インストール" data-en="Install">インストール</div>
+          <p class="step-desc"
+            data-jp="上の「Add to Slack」からワークスペースに追加。審査不要・無料。"
+            data-en="Click 'Add to Slack' to install in your workspace. Free. No review.">
+            上の「Add to Slack」からワークスペースに追加。審査不要・無料。
+          </p>
+        </div>
+      </div>
+      <div class="howto-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title" data-jp="コマンド実行" data-en="Run a Command">コマンド実行</div>
+          <p class="step-desc"
+            data-jp="Slackで /pp とタイプするだけ。30分がすぐ始まる。"
+            data-en="Type /pp in any Slack channel. Default is 30 min (25 focus + 5 break).">
+            Slackで <code class="step-code">/pp</code> とタイプするだけ。30分がすぐ始まる。
+          </p>
+        </div>
+      </div>
+      <div class="howto-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title" data-jp="あとは集中するだけ" data-en="Just Focus">あとは集中するだけ</div>
+          <p class="step-desc"
+            data-jp="ステータスは変わり、DMは執事が捌く。通知が来たら休憩タイム。"
+            data-en="Status updates automatically. DMs go to the butler. Rest when notified.">
+            ステータスは変わり、DMは執事が捌く。通知が来たら休憩タイム。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── COMMANDS ─── -->
+  <section class="commands-section">
+    <div class="commands-inner">
+      <div class="section-label" data-jp="コマンド一覧" data-en="COMMANDS">コマンド一覧</div>
+      <h2 class="section-title"
+        data-jp="<em>全部</em>、/ppから。"
+        data-en="Everything starts with <em>/pp</em>.">
+        <em>全部</em>、/ppから。
+      </h2>
+      <table class="cmd-table">
+        <tbody>
+          <tr>
+            <td style="width:180px"><span class="cmd-code">/pp</span></td>
+            <td class="cmd-desc"
+              data-jp="デフォルト30分スタート（25分集中＋5分休憩）"
+              data-en="Start default 30 min session (25 focus + 5 break)">
+              デフォルト30分スタート（25分集中＋5分休憩）
+            </td>
+            <td style="text-align:right"><span class="cmd-tag">BASIC</span></td>
+          </tr>
+          <tr>
+            <td><span class="cmd-code">/pp 60</span></td>
+            <td class="cmd-desc"
+              data-jp="総時間指定。5:1で自動分割（50分集中＋10分休憩）"
+              data-en="Specify total minutes. Split 5:1 automatically (e.g. 50+10)">
+              総時間指定。5:1で自動分割（50分集中＋10分休憩）
+            </td>
+            <td style="text-align:right"><span class="cmd-tag">BASIC</span></td>
+          </tr>
+          <tr>
+            <td><span class="cmd-code">/pp stop</span></td>
+            <td class="cmd-desc"
+              data-jp="タイマー停止。ステータスを元に戻す。"
+              data-en="Stop timer and revert your status.">
+              タイマー停止。ステータスを元に戻す。
+            </td>
+            <td style="text-align:right"><span class="cmd-tag">BASIC</span></td>
+          </tr>
+          <tr>
+            <td><span class="cmd-code">/pp status</span></td>
+            <td class="cmd-desc"
+              data-jp="残り時間の確認。"
+              data-en="Check remaining time.">
+              残り時間の確認。
+            </td>
+            <td style="text-align:right"><span class="cmd-tag">BASIC</span></td>
+          </tr>
+          <tr>
+            <td><span class="cmd-code">/pp set ○○</span></td>
+            <td class="cmd-desc"
+              data-jp="集中中のステータス文言をカスタム設定。"
+              data-en="Set custom status text for focus sessions.">
+              集中中のステータス文言をカスタム設定。
+            </td>
+            <td style="text-align:right"><span class="cmd-tag">CUSTOM</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="footer-toms">🍅🍅🍅</div>
+    <div class="footer-logo">P10ER</div>
+    <p class="footer-sub"
+      data-jp="逆から読んでもトマト"
+      data-en="tomato in Japanese, tomato">
+      トマト！トマト！トマト！トマト！
+    </p>
+    <p class="footer-copy">&copy; 2026 ORUVAIR. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
+      document.querySelectorAll('.lang-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+      document.querySelectorAll('[data-jp]').forEach(function(el) {
+        var txt = el.getAttribute('data-' + lang);
+        if (txt) el.innerHTML = txt;
+      });
+    }
+  </script>
+
+</body>
+</html>

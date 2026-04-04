@@ -1,0 +1,27 @@
+{
+  "name": "p10er",
+  "version": "1.0.0",
+  "description": "ポモドーロタイマー兼執事Bot\r 競合無視・経験積みが目的のプロジェクト",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m4skedvanir-2/tomatotimer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/m4skedvanir-2/tomatotimer/issues"
+  },
+  "homepage": "https://github.com/m4skedvanir-2/tomatotimer#readme",
+  "dependencies": {
+    "@slack/bolt": "^4.6.0",
+    "dotenv": "^17.4.0",
+    "pg": "^8.20.0"
+  }
+}

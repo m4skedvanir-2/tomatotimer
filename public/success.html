@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P10ER — インストール完了</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --tomato: #C0392B; --tomato-dark: #922B21; --tomato-pale: #FADBD8;
+  --tomato-mid: #F1948A; --cream: #FDF6EC; --ink: #1A1008;
+  --ink-mid: #5D3A2A; --font: 'Noto Sans JP', 'Noto Sans', sans-serif;
+}
+
+body { font-family: var(--font); background: var(--cream); color: var(--ink); }
+.page { min-height: 100vh; display: flex; flex-direction: column; }
+
+.confetti-bar { background: var(--tomato); padding: 8px 0; overflow: hidden; white-space: nowrap; }
+.confetti-inner { display: inline-block; animation: slide 18s linear infinite; }
+.confetti-inner span { font-size: 20px; margin: 0 10px; }
+@keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.hero { background: var(--tomato); padding: 80px 24px 72px; text-align: center; position: relative; overflow: hidden; }
+.hero-dots { position: absolute; inset: 0; opacity: 0.1; background-image: radial-gradient(circle, #fff 1.5px, transparent 1.5px); background-size: 28px 28px; }
+.hero-bg-tom { position: absolute; font-size: 220px; opacity: 0.08; bottom: -40px; right: -20px; line-height: 1; user-select: none; }
+.hero-bg-tom2 { position: absolute; font-size: 100px; opacity: 0.1; top: 10px; left: -10px; line-height: 1; user-select: none; }
+.hero-inner { position: relative; }
+.check-wrap { width: 72px; height: 72px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 32px; }
+.hero-eyebrow { display: inline-block; background: rgba(255,255,255,0.2); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; padding: 5px 14px; margin-bottom: 16px; }
+.hero-title { font-size: 52px; font-weight: 700; color: white; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 12px; }
+.hero-sub { font-size: 17px; color: rgba(255,255,255,0.8); line-height: 1.6; max-width: 400px; margin: 0 auto 32px; }
+.cta-btn { display: inline-block; background: white; color: var(--tomato-dark); font-family: var(--font); font-size: 14px; font-weight: 700; padding: 13px 28px; text-decoration: none; letter-spacing: 0.04em; transition: transform 0.12s; }
+.cta-btn:hover { transform: translateY(-2px); }
+
+.butler-wrap { background: var(--cream); padding: 56px 24px; max-width: 600px; margin: 0 auto; text-align: center; width: 100%; }
+.butler-icon { font-size: 40px; margin-bottom: 4px; }
+.butler-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--tomato); margin-bottom: 16px; }
+.butler-card { background: white; border: 2px solid var(--tomato-pale); padding: 24px 28px; text-align: left; position: relative; }
+.butler-card::before { content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid var(--tomato-pale); }
+.butler-card::after { content: ''; position: absolute; top: -7px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 9px solid white; }
+.butler-name { font-size: 12px; font-weight: 700; color: var(--ink-mid); margin-bottom: 10px; letter-spacing: 0.05em; }
+.butler-text { font-size: 15px; color: var(--ink); line-height: 1.75; }
+.butler-text em { font-style: normal; color: var(--tomato); font-weight: 700; }
+
+.next-section { background: var(--ink); padding: 56px 24px; }
+.next-inner { max-width: 800px; margin: 0 auto; }
+.next-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--tomato-mid); margin-bottom: 12px; }
+.next-title { font-size: 30px; font-weight: 700; color: white; margin-bottom: 32px; }
+.next-title em { font-style: normal; color: var(--tomato-mid); }
+.next-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; background: rgba(255,255,255,0.06); }
+.next-card { background: var(--ink); padding: 24px 20px; border: 1px solid rgba(255,255,255,0.06); }
+.next-step { font-size: 11px; font-weight: 700; color: var(--tomato-mid); letter-spacing: 0.12em; margin-bottom: 8px; }
+.next-cmd { font-family: 'Courier New', monospace; font-size: 16px; color: #FF8A80; font-weight: 700; margin-bottom: 8px; }
+.next-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+.facts-section { padding: 56px 24px; max-width: 800px; margin: 0 auto; width: 100%; }
+.facts-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--tomato); margin-bottom: 12px; }
+.facts-title { font-size: 30px; font-weight: 700; color: var(--ink); margin-bottom: 28px; }
+.facts-title em { font-style: normal; color: var(--tomato); }
+.dishes { display: flex; flex-wrap: wrap; gap: 8px; }
+.dish { background: var(--tomato-pale); color: var(--tomato-dark); font-size: 13px; font-weight: 700; padding: 8px 16px; letter-spacing: 0.04em; }
+.dish-soon { background: rgba(0,0,0,0.06); color: var(--ink-mid); font-size: 13px; font-weight: 500; padding: 8px 16px; letter-spacing: 0.04em; }
+
+.footer { background: var(--tomato-dark); padding: 28px 24px; text-align: center; margin-top: auto; }
+.footer-logo { font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.02em; margin-bottom: 4px; }
+.footer-sub { font-size: 12px; color: rgba(255,255,255,0.45); }
+.footer-toms { font-size: 20px; letter-spacing: 4px; margin-bottom: 10px; }
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 36px; }
+  .next-title, .facts-title { font-size: 24px; }
+  .butler-card { padding: 20px 18px; }
+}
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ─── CONFETTI BAR ─── -->
+  <div class="confetti-bar">
+    <div class="confetti-inner">
+      <span>🍅</span><span>🎉</span><span>🍅</span><span>✨</span>
+      <span>🍅</span><span>🎊</span><span>🍅</span><span>🎉</span>
+      <span>🍅</span><span>✨</span><span>🍅</span><span>🎊</span>
+      <span>🍅</span><span>🎉</span><span>🍅</span><span>✨</span>
+      <span>🍅</span><span>🎊</span><span>🍅</span><span>🎉</span>
+      <span>🍅</span><span>✨</span><span>🍅</span><span>🎊</span>
+      <span>🍅</span><span>🎉</span><span>🍅</span><span>✨</span>
+      <span>🍅</span><span>🎊</span><span>🍅</span><span>🎉</span>
+      <span>🍅</span><span>✨</span><span>🍅</span><span>🎊</span>
+    </div>
+  </div>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-dots"></div>
+    <div class="hero-bg-tom">🍅</div>
+    <div class="hero-bg-tom2">🍅</div>
+    <div class="hero-inner">
+      <div class="check-wrap">🍅</div>
+      <div class="hero-eyebrow">インストール完了 · INSTALLATION COMPLETE</div>
+      <h1 class="hero-title">ようこそ、<br>トマトの世界へ。</h1>
+      <p class="hero-sub">P10ERがワークスペースに加わりました。あとは /pp を打つだけです。</p>
+      <a href="https://slack.com" class="cta-btn">Slackを開く →</a>
+    </div>
+  </section>
+
+  <!-- ─── BUTLER MESSAGE ─── -->
+  <div class="butler-wrap">
+    <div class="butler-icon">🤵</div>
+    <div class="butler-label">執事よりご挨拶</div>
+    <div class="butler-card">
+      <div class="butler-name">P10ER BUTLER</div>
+      <p class="butler-text">
+        この度はご導入いただき、誠にありがとうございます。<br>
+        お客様が集中されている間、参りますDMはこの私めが<em>トマト料理</em>を添えて丁重にお断り申し上げます。<br><br>
+        まずは <em>/pp</em> とお打ちくださいませ。🍅
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── WHAT'S NEXT ─── -->
+  <section class="next-section">
+    <div class="next-inner">
+      <div class="next-label">まず何をする？</div>
+      <h2 class="next-title"><em>全部</em>、/ppから始まる。</h2>
+      <div class="next-grid">
+        <div class="next-card">
+          <div class="next-step">STEP 01</div>
+          <div class="next-cmd">/pp</div>
+          <p class="next-desc">今すぐ30分の集中セッション開始。ステータスが🍅に変わります。</p>
+        </div>
+        <div class="next-card">
+          <div class="next-step">STEP 02</div>
+          <div class="next-cmd">/pp 60</div>
+          <p class="next-desc">時間を指定したいときは数字で。5:1で自動分割されます。</p>
+        </div>
+        <div class="next-card">
+          <div class="next-step">STEP 03</div>
+          <div class="next-cmd">/pp set ○○</div>
+          <p class="next-desc">集中中のステータス文言を自分好みにカスタム。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TOMATO DISHES ─── -->
+  <section class="facts-section">
+    <div class="facts-label">執事が用意したメニュー</div>
+    <h2 class="facts-title">今日のトマト料理は<em>何</em>かな。</h2>
+    <div class="dishes">
+      <div class="dish">🍅 トマトクリームパスタ</div>
+      <div class="dish">🍅 カプレーゼ</div>
+      <div class="dish">🍅 トマトリゾット</div>
+      <div class="dish">🍅 ガスパチョ</div>
+      <div class="dish">🍅 トマトブルスケッタ</div>
+      <div class="dish">🍅 シャクシュカ</div>
+      <div class="dish">🍅 トマトスープ</div>
+      <div class="dish">🍅 マルゲリータピザ</div>
+      <div class="dish">🍅 トマトタルタル</div>
+      <div class="dish-soon">+ もっと増えるかも</div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="footer-toms">🍅🍅🍅</div>
+    <div class="footer-logo">P10ER</div>
+    <p class="footer-sub">🍅ーーーーーーー🍅</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
