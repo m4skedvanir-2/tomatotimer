@@ -1,6 +1,7 @@
 const { WebClient } = require('@slack/web-api');
 require('dotenv').config();
 const path = require('path');
+const pool = require('../db');
 
 const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID;
 const SLACK_CLIENT_SECRET = process.env.SLACK_CLIENT_SECRET;
@@ -27,7 +28,22 @@ function setupOAuthRoutes(expressApp) {
                 code: code,
                 redirect_uri: REDIRECT_URI,
             });
-            // TODO: DBにトークン保存
+            // DBにトークン保存
+            await pool.query(
+                `INSERT INTO workspaces (team_id, bot_token)
+                 VALUES ($1, $2)
+                 ON CONFLICT (team_id) DO UPDATE SET bot_token = $2`,
+                [result.team.id, result.access_token]
+            );
+            if (result.authed_user?.access_token) {
+                await pool.query(
+                    `INSERT INTO users (team_id, user_id, user_token)
+                     VALUES ($1, $2, $3)
+                     ON CONFLICT (team_id, user_id) DO UPDATE SET user_token = $3`,
+                    [result.team.id, result.authed_user.id, result.authed_user.access_token]
+                );
+            }
+            
             console.log('OAuth Success:', result.team.name);
             res.sendFile(path.join(__dirname, '../../public/success.html'));
         } catch (error) {
