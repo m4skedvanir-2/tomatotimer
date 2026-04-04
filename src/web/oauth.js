@@ -33,7 +33,7 @@ function setupOAuthRoutes(expressApp) {
                 `INSERT INTO workspaces (team_id, bot_token)
                  VALUES ($1, $2)
                  ON CONFLICT (team_id) DO UPDATE SET bot_token = $2`,
-                [result.team.id, result.access_token]
+                [result.team.id, result.bot_token]
             );
             if (result.authed_user?.access_token) {
                 await pool.query(
@@ -43,7 +43,7 @@ function setupOAuthRoutes(expressApp) {
                     [result.team.id, result.authed_user.id, result.authed_user.access_token]
                 );
             }
-            
+
             console.log('OAuth Success:', result.team.name);
             res.sendFile(path.join(__dirname, '../../public/success.html'));
         } catch (error) {
