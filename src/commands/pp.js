@@ -1,4 +1,5 @@
 const { calcTime, scheduleTimer, cancelTimer } = require('../utils/timer');
+const { setFocusStatus, restoreStatus, sendMessage, getStatus } = require('../utils/slack');
 const pool = require('../db');
 
 async function ppCommand({ command, ack, respond }) {
@@ -87,13 +88,41 @@ async function ppCommand({ command, ack, respond }) {
   }
 
   const { focusMin, breakMin } = calcTime(totalMin);
+  // ユーザー設定取得
+  const { rows: settings } = await pool.query(
+    `SELECT user_token, custom_status_text FROM user_settings WHERE team_id=$1 AND user_id=$2`,
+    [command.team_id, command.user_id]
+  );
+  const userToken = settings[0]?.user_token;
+  const customStatusText = settings[0]?.custom_status_text || 'tomato time';
+
+  // 元のステータス保持
+  let prevStatusText = '';
+  let prevStatusEmoji = '';
+  if (userToken) {
+    const prev = await getStatus(userToken);
+    prevStatusText = prev.statusText;
+    prevStatusEmoji = prev.statusEmoji;
+  }
 
   const { rows } = await pool.query(
-    `INSERT INTO timers (team_id, user_id, channel_id, focus_min, break_min, status)
-     VALUES ($1, $2, $3, $4, $5, 'focus') RETURNING *`,
-    [command.team_id, command.user_id, command.channel_id, focusMin, breakMin]
+    `INSERT INTO timers (team_id, user_id, channel_id, focus_min, break_min, status, prev_status_text, prev_status_emoji)
+     VALUES ($1, $2, $3, $4, $5, 'focus', $6, $7) RETURNING *`,
+    [command.team_id, command.user_id, command.channel_id, focusMin, breakMin, prevStatusText, prevStatusEmoji]
   );
   const timer = rows[0];
+  
+  // ステータスを🍅に変更
+  if (userToken) {
+    await setFocusStatus(userToken, customStatusText);
+  }
+
+  // ワークスペースのbotトークン取得
+  const { row: ws } = await pool.query(
+    `SELECT bot_token FROM workspaces WHERE team_id=$1`,
+    [command.team_id]
+  );
+  const botToken = ws[0]?.bot_token;
 
   scheduleTimer({
     timerId: timer.id,
@@ -102,11 +131,21 @@ async function ppCommand({ command, ack, respond }) {
     breakMin,
     onFocusEnd: async () => {
       await pool.query(`UPDATE timers SET status='break' WHERE id=$1`, [timer.id]);
-      // TODO: Slack通知・ステータス変更
+      // Slack通知・ステータス変更
+      if (botToken) {
+        await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅料理をどうぞ！休憩${breakMin}分`);
+        }
+        // TODO: トマト料理をランダムに変える処理の追加
     },
     onBreakEnd: async () => {
       await pool.query(`UPDATE timers SET status='done' WHERE id=$1`, [timer.id]);
       // TODO: Slack終了通知・ステータス戻す
+      if (userToken) {
+        await restoreStatus(userToken, prevStatusText, prevStatusEmoji);
+      }
+      if (botToken) {
+        await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅Time終了です！`);
+      }
     },
   });
 
