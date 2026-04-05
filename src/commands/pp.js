@@ -138,6 +138,7 @@ async function ppCommand({ command, ack, respond }) {
         // TODO: トマト料理をランダムに変える処理の追加
     },
     onBreakEnd: async () => {
+        console.log('ブレイク終了処理開始');
       await pool.query(`UPDATE timers SET status='done' WHERE id=$1`, [timer.id]);
       if (userToken) {
         await restoreStatus(userToken, prevStatusText, prevStatusEmoji);
