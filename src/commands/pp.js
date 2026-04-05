@@ -39,7 +39,9 @@ async function ppCommand({ command, ack, respond }) {
     const start = new Date(timer.started_at).getTime();
     const focusEnd = start + timer.focus_min * 60 * 1000;
     const breakEnd = focusEnd + timer.break_min * 60 * 1000;
-    const remaining = Math.max(0, Math.ceil((breakEnd - now) / 1000 / 60));
+    const remaining = timer.status === 'focus'
+        ? Math.max(0, Math.ceil((focusEnd - now) / 1000 / 60))
+        : Math.max(0, Math.ceil((breakEnd - now) / 1000 / 60));
     await respond(`現在${timer.status === 'focus' ? '集中中' : '休憩中'}です。残り約${remaining}分🍅`);
     return;
   }

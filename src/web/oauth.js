@@ -10,7 +10,7 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 function setupOAuthRoutes(expressApp) {
     // Add to Slack　ボタンの遷移先
     expressApp.get('/slack/install', (req, res) => {
-        const url = `https://slack.com/oauth/v2/authorize?client_id=${SLACK_CLIENT_ID}&scope=commands,users.profile:write&redirect_uri=${REDIRECT_URI}`;
+        const url = `https://slack.com/oauth/v2/authorize?client_id=${SLACK_CLIENT_ID}&scope=commands,chat:write,im:history,im:read,im:write&user_scope=users.profile:write,users.profile:read&redirect_uri=${REDIRECT_URI}`;
         res.redirect(url);
     });
 
