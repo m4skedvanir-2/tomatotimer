@@ -118,7 +118,7 @@ async function ppCommand({ command, ack, respond }) {
   }
 
   // ワークスペースのbotトークン取得
-  const { row: ws } = await pool.query(
+  const { rows: ws } = await pool.query(
     `SELECT bot_token FROM workspaces WHERE team_id=$1`,
     [command.team_id]
   );
@@ -139,7 +139,6 @@ async function ppCommand({ command, ack, respond }) {
     },
     onBreakEnd: async () => {
       await pool.query(`UPDATE timers SET status='done' WHERE id=$1`, [timer.id]);
-      // TODO: Slack終了通知・ステータス戻す
       if (userToken) {
         await restoreStatus(userToken, prevStatusText, prevStatusEmoji);
       }
