@@ -1,7 +1,7 @@
 const { WebClient } = require('@slack/web-api');
 
 // タイマー中のステータス変更
-async function setForcusStatus(userToken, statusText, statusEmoji = ':tomato:') {
+async function setFocusStatus(userToken, statusText, statusEmoji = ':tomato:') {
     const client = new WebClient(userToken);
     await client.users.profile.set({
         profile: {
@@ -43,4 +43,4 @@ async function getStatus(userToken) {
     };
 }
 
-module.exports = { setForcusStatus, restoreStatus, sendMessage, getStatus };
+module.exports = { setFocusStatus, restoreStatus, sendMessage, getStatus };
