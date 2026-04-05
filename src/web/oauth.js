@@ -28,7 +28,6 @@ function setupOAuthRoutes(expressApp) {
                 code: code,
                 redirect_uri: REDIRECT_URI,
             });
-            console.log('OAuth result:', JSON.stringify(result, null, 2));
             // DBにトークン保存
             await pool.query(
                 `INSERT INTO workspaces (team_id, bot_token)
