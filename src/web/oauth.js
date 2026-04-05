@@ -38,7 +38,7 @@ function setupOAuthRoutes(expressApp) {
             );
             if (result.authed_user?.access_token) {
                 await pool.query(
-                    `INSERT INTO users_settings (team_id, user_id, user_token)
+                    `INSERT INTO user_settings (team_id, user_id, user_token)
                      VALUES ($1, $2, $3)
                      ON CONFLICT (team_id, user_id) DO UPDATE SET user_token = $3`,
                     [result.team.id, result.authed_user.id, result.authed_user.access_token]
