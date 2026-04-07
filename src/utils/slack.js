@@ -27,10 +27,20 @@ async function restoreStatus(userToken, statusText,statusEmoji) {
 // チャンネルにメッセージを送信
 async function sendMessage(botToken, channelId, text) {
     const client = new WebClient(botToken);
-    await client.chat.postMessage({
-        channel: channelId,
-        text: text,
-    });
+    if (channelId.startsWith('D')) {
+        // DMの場合はユーザーIDを取得してから送信
+        const result = await client.conversations.open({ channel: channelId });
+        await client.chat.postMessage({
+            channel: result.channel.id,
+            text: text,
+        });
+        
+    } else {
+        await client.chat.postMessage({
+            channel: channelId,
+            text: text,
+        });
+    }
 }
 
 // 現在のステータスを取得
