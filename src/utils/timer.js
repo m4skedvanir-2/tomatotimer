@@ -23,7 +23,7 @@ function scheduleTimer({ timerId, startedAt, focusMin, breakMin, onFocusEnd, onB
         // フォーカスタイマーがまだ残っている場合は、フォーカスタイマーをセットし、終了後にブレイクタイマーをセットする
         timers.focus = setTimeout(async () => {
             await onFocusEnd();
-            if (breakRemaining > 0) {
+            if (breakEnd - Date.now() > 0) {
                 timers.break = setTimeout(async () => {
                     await onBreakEnd();
                     activeTimers.delete(timerId);

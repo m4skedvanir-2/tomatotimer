@@ -130,8 +130,10 @@ async function ppCommand({ command, ack, respond }) {
     focusMin,
     breakMin,
     onFocusEnd: async () => {
+        console.log('フォーカスタイマー終了:botToken:', botToken ? '存在する' : 'undefined');
       await pool.query(`UPDATE timers SET status='break' WHERE id=$1`, [timer.id]);
       // Slack通知・ステータス変更
+      console.log('フォーカス終了処理開始');
       if (botToken) {
         await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅料理をどうぞ！休憩${breakMin}分`);
         }
