@@ -135,7 +135,7 @@ async function ppCommand({ command, ack, respond }) {
       // Slack通知・ステータス変更
       console.log('フォーカス終了処理開始');
       if (botToken) {
-        await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅料理をどうぞ！休憩${breakMin}分`);
+        //await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅料理をどうぞ！休憩${breakMin}分`);
         }
         // TODO: トマト料理をランダムに変える処理の追加
     },
@@ -146,7 +146,7 @@ async function ppCommand({ command, ack, respond }) {
         await restoreStatus(userToken, prevStatusText, prevStatusEmoji);
       }
       if (botToken) {
-        await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅Time終了です！`);
+        //await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅Time終了です！`);
       }
     },
   });
