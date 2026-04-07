@@ -135,8 +135,11 @@ async function ppCommand({ command, ack, respond }) {
       // Slack通知・ステータス変更
       console.log('フォーカス終了処理開始');
       if (botToken) {
+        console.log('channel_id:', timer.channel_id);
         //await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅料理をどうぞ！休憩${breakMin}分`);
-        }
+        } else {
+        console.log('Bot token is missing, skipping message sending');
+      }
         // TODO: トマト料理をランダムに変える処理の追加
     },
     onBreakEnd: async () => {
