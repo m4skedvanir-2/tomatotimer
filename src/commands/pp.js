@@ -147,7 +147,7 @@ async function ppCommand({ command, ack, respond }) {
         await restoreStatus(userToken, prevStatusText, prevStatusEmoji);
       }
       if (botToken) {
-        //await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅Time終了です！`);
+        await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅Time終了です！`);
       }
     },
   });
