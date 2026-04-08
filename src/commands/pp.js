@@ -136,7 +136,7 @@ async function ppCommand({ command, ack, respond }) {
       console.log('フォーカス終了処理開始');
       if (botToken) {
         console.log('channel_id:', timer.channel_id);
-        await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅料理をどうぞ！休憩${breakMin}分`);
+        await sendMessage(botToken, timer.user_id, `<@${command.user_id}> さん🍅料理をどうぞ！休憩${breakMin}分`);
       }
         // TODO: トマト料理をランダムに変える処理の追加
     },
@@ -147,7 +147,7 @@ async function ppCommand({ command, ack, respond }) {
         await restoreStatus(userToken, prevStatusText, prevStatusEmoji);
       }
       if (botToken) {
-        await sendMessage(botToken, timer.channel_id, `<@${command.user_id}> さん🍅Time終了です！`);
+        await sendMessage(botToken, timer.user_id, `<@${command.user_id}> さん🍅Time終了です！`);
       }
     },
   });
