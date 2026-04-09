@@ -2,7 +2,7 @@ const { calcTime, scheduleTimer, cancelTimer } = require('../utils/timer');
 const { setFocusStatus, restoreStatus, sendMessage, getStatus } = require('../utils/slack');
 const pool = require('../db');
 
-async function ppCommand({ command, ack, respond }) {
+async function ppCommand({ command, ack, respond, client }) {
   await ack();
   const args = command.text.trim();
 
@@ -21,6 +21,15 @@ async function ppCommand({ command, ack, respond }) {
       `UPDATE timers SET status='stopped' WHERE id=$1`,
       [rows[0].id]
     );
+    // ステータスを元に戻す
+    const { rows: settings } = await pool.query(
+      `SELECT user_token FROM user_settings WHERE team_id=$1 AND user_id=$2`,
+      [command.team_id, command.user_id]
+    );
+    const userToken = settings[0]?.user_token;
+    if (userToken) {
+      await restoreStatus(userToken, rows[0].prev_status_text, rows[0].prev_status_emoji);
+    }
     await respond('タイマーを停止しました🍅');
     return;
   }
@@ -70,7 +79,15 @@ async function ppCommand({ command, ack, respond }) {
     await respond('使い方：/pp, /pp 60, /pp stop, /pp status, /pp set ○○');
     return;
   }
-
+  // チャンネルの場合Botが参加してるか確認
+  if (command.channel_id.startsWith('C')) {
+    try {
+      await client.conversations.members({ channel: command.channel_id });
+    } catch (e) {
+      await respond('P10ERをこのチャンネルに招待してから使ってください。\n`/invite @p10er`');
+      return;
+    }
+  }
   const totalMin = args === '' ? 30 : parseInt(args, 10);
   if (totalMin < 6 || totalMin > 480) {
     await respond('時間は6〜480分で指定してください🍅');
